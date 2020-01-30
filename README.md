@@ -38,15 +38,15 @@
 
 ## Screenshots
 
-![](https://github.com/AppleEducate/plugins/blob/master/packages/data_tables/screenshots/1.PNG)
+![](https://github.com/rodydavis/data_tables/blob/master/screenshots/1.PNG)
 
-![](https://github.com/AppleEducate/plugins/blob/master/packages/data_tables/screenshots/2.PNG)
+![](https://github.com/rodydavis/data_tables/blob/master/screenshots/2.PNG)
 
-![](https://github.com/AppleEducate/plugins/blob/master/packages/data_tables/screenshots/3.PNG)
+![](https://github.com/rodydavis/data_tables/blob/master/screenshots/3.PNG)
 
-![](https://github.com/AppleEducate/plugins/blob/master/packages/data_tables/screenshots/4.PNG)
+![](https://github.com/rodydavis/data_tables/blob/master/screenshots/4.PNG)
 
-![](https://github.com/AppleEducate/plugins/blob/master/packages/data_tables/screenshots/5.PNG)
+![](https://github.com/rodydavis/data_tables/blob/master/screenshots/5.PNG)
 
 
 ## Example
