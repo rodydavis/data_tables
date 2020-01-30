@@ -1,3 +1,8 @@
+## 1.0.2
+
+* Bumping version
+* Updated Example
+
 ## 1.0.1 - 04.06.2019
 
 * Fixing Bugs on Mobile
