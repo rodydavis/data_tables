@@ -7,6 +7,8 @@
 * Mobile ListView with Action Buttons for Sorting and Selecting All
 * Supports Dark Mode
 
+Online Demo: https://rodydavis.github.io/data_tables/
+
 ## Getting Started
 
 * You can optionally build the listview for mobile with a builder, by default it creates a ExpansionTile with the remaining columns as children
