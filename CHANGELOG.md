@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Adding support for web
+
 ## 1.0.2
 
 * Bumping version

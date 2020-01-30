@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 /// main is entry point of Flutter application
 void main() {
   // Desktop platforms aren't a valid platform.
-  _setTargetPlatformForDesktop();
+  if (!kIsWeb) _setTargetPlatformForDesktop();
   return runApp(MyApp());
 }
 
@@ -72,6 +72,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       // theme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         // appBar: AppBar(
         //   title: const Text('Native Data Table Example'),

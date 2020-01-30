@@ -118,53 +118,57 @@ class NativeDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (alwaysShowDataTable ||
-        (MediaQuery.of(context).size.width >= tabletBreakpoint.width &&
-            MediaQuery.of(context).size.height >= tabletBreakpoint.height)) {
-      return StatelessDataTable(
-        rows: rows,
-        firstRowIndex: firstRowIndex,
-        header: header ?? Container(),
-        handleNext: handleNext,
-        handlePrevious: handlePrevious,
-        rowsPerPage: rowsPerPage,
-        onRowsPerPageChanged: onRowsPerPageChanged,
-        sortColumnIndex: sortColumnIndex,
-        sortAscending: sortAscending,
-        onSelectAll: onSelectAll,
-        columns: columns,
-        shrinkWrap: false,
-        rowCountApproximate: rowCountApproximate,
-        actions: []
-          ..addAll(actions)
-          ..add(Container(
-            child: onRefresh == null
-                ? null
-                : IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: onRefresh,
-                  ),
-          )),
-        selectedActions: selectedActions,
-      );
-    }
+    return LayoutBuilder(
+      builder: (_, dimens) {
+        if (alwaysShowDataTable ||
+            (dimens.maxWidth >= tabletBreakpoint.width &&
+                dimens.maxHeight >= tabletBreakpoint.height)) {
+          return StatelessDataTable(
+            rows: rows,
+            firstRowIndex: firstRowIndex,
+            header: header ?? Container(),
+            handleNext: handleNext,
+            handlePrevious: handlePrevious,
+            rowsPerPage: rowsPerPage,
+            onRowsPerPageChanged: onRowsPerPageChanged,
+            sortColumnIndex: sortColumnIndex,
+            sortAscending: sortAscending,
+            onSelectAll: onSelectAll,
+            columns: columns,
+            shrinkWrap: false,
+            rowCountApproximate: rowCountApproximate,
+            actions: []
+              ..addAll(actions)
+              ..add(Container(
+                child: onRefresh == null
+                    ? null
+                    : IconButton(
+                        icon: Icon(Icons.refresh),
+                        onPressed: onRefresh,
+                      ),
+              )),
+            selectedActions: selectedActions,
+          );
+        }
 
-    return PagedListView(
-      rows: rows,
-      slivers: mobileSlivers,
-      columns: columns,
-      loadNext: handleNext,
-      mobileItemBuilder: mobileItemBuilder,
-      actions: actions,
-      selectedActions: selectedActions,
-      onSelectAll: onSelectAll,
-      rowsPerPage: rowsPerPage,
-      sortAscending: sortAscending,
-      sortColumnIndex: sortColumnIndex,
-      onRefresh: onRefresh,
-      isRowCountApproximate: rowCountApproximate,
-      isLoading: mobileIsLoading,
-      noItems: noItems,
+        return PagedListView(
+          rows: rows,
+          slivers: mobileSlivers,
+          columns: columns,
+          loadNext: handleNext,
+          mobileItemBuilder: mobileItemBuilder,
+          actions: actions,
+          selectedActions: selectedActions,
+          onSelectAll: onSelectAll,
+          rowsPerPage: rowsPerPage,
+          sortAscending: sortAscending,
+          sortColumnIndex: sortColumnIndex,
+          onRefresh: onRefresh,
+          isRowCountApproximate: rowCountApproximate,
+          isLoading: mobileIsLoading,
+          noItems: noItems,
+        );
+      },
     );
   }
 
