@@ -54,6 +54,7 @@ class StatelessDataTable extends StatelessWidget {
     @required this.rows,
     this.sortColumnIndex,
     this.sortAscending = true,
+    this.totalItems,
     this.onSelectAll,
     this.firstRowIndex = 0,
     this.onPageChanged,
@@ -115,6 +116,8 @@ class StatelessDataTable extends StatelessWidget {
   final List<DataRow> rows;
 
   final bool shrinkWrap;
+
+  final int totalItems;
 
   /// The current primary sort key's column.
   ///
@@ -305,7 +308,7 @@ class StatelessDataTable extends StatelessWidget {
     footerWidgets.addAll(<Widget>[
       Container(width: 32.0),
       Text(localizations.pageRowsInfoTitle(firstRowIndex + 1,
-          firstRowIndex + rowsPerPage, rows.length, rowCountApproximate)),
+          firstRowIndex + rowsPerPage, totalItems??rows.length, rowCountApproximate)),
       Container(width: 32.0),
       IconButton(
           icon: const Icon(Icons.chevron_left),
@@ -318,7 +321,7 @@ class StatelessDataTable extends StatelessWidget {
           padding: EdgeInsets.zero,
           tooltip: localizations.nextPageTooltip,
           onPressed: (!rowCountApproximate &&
-                  (firstRowIndex + rowsPerPage >= rows.length))
+                  (firstRowIndex + rowsPerPage >= (totalItems??rows.length)))
               ? null
               : handleNext),
       Container(width: 14.0),
