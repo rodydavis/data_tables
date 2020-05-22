@@ -29,6 +29,7 @@ class NativeDataTable extends StatelessWidget {
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     this.header,
     this.onRowsPerPageChanged,
+    this.totalItems,
     this.onSelectAll,
     this.sortAscending,
     this.sortColumnIndex,
@@ -53,6 +54,7 @@ class NativeDataTable extends StatelessWidget {
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     @required int itemCount,
     @required DataRowBuilder itemBuilder,
+    this.totalItems,
     this.header,
     this.onRowsPerPageChanged,
     this.onSelectAll,
@@ -77,6 +79,8 @@ class NativeDataTable extends StatelessWidget {
   final int sortColumnIndex;
 
   final bool sortAscending;
+  
+  final int totalItems;
 
   final ValueChanged<bool> onSelectAll;
 
@@ -126,6 +130,7 @@ class NativeDataTable extends StatelessWidget {
           return StatelessDataTable(
             rows: rows,
             firstRowIndex: firstRowIndex,
+            totalItems: totalItems,
             header: header ?? Container(),
             handleNext: handleNext,
             handlePrevious: handlePrevious,
