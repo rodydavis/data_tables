@@ -58,6 +58,7 @@ class StatelessDataTable extends StatelessWidget {
     this.firstRowIndex = 0,
     this.onPageChanged,
     this.shrinkWrap = false,
+    this.showCheckboxColumn = true,
     this.selectedActions,
     this.rowCountApproximate = false,
     this.rowsPerPage = defaultRowsPerPage,
@@ -115,6 +116,11 @@ class StatelessDataTable extends StatelessWidget {
   final List<DataRow> rows;
 
   final bool shrinkWrap;
+
+  /// Whether the widget should display checkboxes for selectable rows.
+  ///
+  /// See [DataTable.showCheckboxColumn]
+  final bool showCheckboxColumn;
 
   /// The current primary sort key's column.
   ///
@@ -373,6 +379,7 @@ class StatelessDataTable extends StatelessWidget {
                     sortAscending: sortAscending,
                     onSelectAll: onSelectAll,
                     rows: rows,
+                    showCheckboxColumn: showCheckboxColumn,
                   );
                 },
               ),
@@ -444,12 +451,14 @@ class StatelessDataTable extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                        key: _tableKey,
-                        columns: columns,
-                        sortColumnIndex: sortColumnIndex,
-                        sortAscending: sortAscending,
-                        onSelectAll: onSelectAll,
-                        rows: _getRows(firstRowIndex, rowsPerPage)),
+                      key: _tableKey,
+                      columns: columns,
+                      sortColumnIndex: sortColumnIndex,
+                      sortAscending: sortAscending,
+                      onSelectAll: onSelectAll,
+                      rows: _getRows(firstRowIndex, rowsPerPage),
+                      showCheckboxColumn: showCheckboxColumn,
+                    ),
                   ),
                 ],
               ))),

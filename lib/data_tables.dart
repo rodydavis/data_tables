@@ -46,6 +46,7 @@ class NativeDataTable extends StatelessWidget {
     this.mobileIsLoading,
     this.mobileSlivers,
     this.alwaysShowDataTable = false,
+    this.showCheckboxColumn = true,
   });
 
   NativeDataTable.builder({
@@ -72,6 +73,7 @@ class NativeDataTable extends StatelessWidget {
     this.mobileIsLoading,
     this.mobileSlivers,
     this.alwaysShowDataTable = false,
+    this.showCheckboxColumn = true,
   }) : rows = _buildRows(itemCount, itemBuilder);
 
   final int sortColumnIndex;
@@ -116,6 +118,8 @@ class NativeDataTable extends StatelessWidget {
 
   final bool alwaysShowDataTable;
 
+  final bool showCheckboxColumn;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -148,6 +152,7 @@ class NativeDataTable extends StatelessWidget {
                       ),
               )),
             selectedActions: selectedActions,
+            showCheckboxColumn: showCheckboxColumn,
           );
         }
 
@@ -167,6 +172,7 @@ class NativeDataTable extends StatelessWidget {
           isRowCountApproximate: rowCountApproximate,
           isLoading: mobileIsLoading,
           noItems: noItems,
+          showCheckboxColumn: showCheckboxColumn,
         );
       },
     );

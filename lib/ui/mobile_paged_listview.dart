@@ -19,6 +19,7 @@ class PagedListView extends StatefulWidget {
     this.noItems,
     this.isLoading,
     this.slivers,
+    this.showCheckboxColumn = false,
   });
 
   final double initialScrollOffset;
@@ -48,6 +49,8 @@ class PagedListView extends StatefulWidget {
   final bool isRowCountApproximate;
 
   final List<Widget> slivers;
+
+  final bool showCheckboxColumn;
 
   @override
   _NativePagedListViewState createState() => _NativePagedListViewState();
@@ -102,15 +105,16 @@ class _NativePagedListViewState extends State<PagedListView> {
                             widget?.mobileItemBuilder ??
                                 (BuildContext context, int index) {
                                   return ExpansionTile(
-                                    leading: Checkbox(
-                                      value: widget.rows[index].selected,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          widget.rows[index]
-                                              .onSelectChanged(value);
-                                        });
-                                      },
-                                    ),
+                                    leading: widget?.showCheckboxColumn ??
+                                        Checkbox(
+                                          value: widget.rows[index].selected,
+                                          onChanged: (bool value) {
+                                            setState(() {
+                                              widget.rows[index]
+                                                  .onSelectChanged(value);
+                                            });
+                                          },
+                                        ),
                                     title: widget.rows[index].cells.first.child,
                                     children: _buildMobileChildren(index),
                                   );
