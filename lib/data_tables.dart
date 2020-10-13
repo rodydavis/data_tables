@@ -121,8 +121,7 @@ class NativeDataTable extends StatelessWidget {
     return LayoutBuilder(
       builder: (_, dimens) {
         if (alwaysShowDataTable ||
-            (dimens.maxWidth >= tabletBreakpoint.width &&
-                dimens.maxHeight >= tabletBreakpoint.height)) {
+            (dimens.maxWidth >= tabletBreakpoint.width && dimens.maxHeight >= tabletBreakpoint.height)) {
           return StatelessDataTable(
             rows: rows,
             firstRowIndex: firstRowIndex,
@@ -137,16 +136,17 @@ class NativeDataTable extends StatelessWidget {
             columns: columns,
             shrinkWrap: false,
             rowCountApproximate: rowCountApproximate,
-            actions: []
-              ..addAll(actions)
-              ..add(Container(
-                child: onRefresh == null
-                    ? null
-                    : IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: onRefresh,
-                      ),
-              )),
+            actions: [
+              if (actions != null) ...actions,
+              if (onRefresh != null) ...[
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: onRefresh,
+                  ),
+                )
+              ]
+            ],
             selectedActions: selectedActions,
           );
         }
