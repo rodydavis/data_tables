@@ -342,9 +342,9 @@ class StatelessDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w400),
                 child: IconTheme.merge(
                   data: const IconThemeData(opacity: 0.54),
-                  child: ButtonTheme.bar(
+                  child: ButtonBarTheme(
+                    data: ButtonBarThemeData(buttonHeight: 64),
                     child: Ink(
-                      height: 64.0,
                       color: _selectedRowCount > 0
                           ? themeData.secondaryHeaderColor
                           : null,
@@ -417,9 +417,9 @@ class StatelessDataTable extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w400),
               child: IconTheme.merge(
                 data: const IconThemeData(opacity: 0.54),
-                child: ButtonTheme.bar(
+                child: ButtonBarTheme(
+                  data: ButtonBarThemeData(buttonHeight: 64.0),
                   child: Ink(
-                    height: 64.0,
                     color: _selectedRowCount > 0
                         ? themeData.secondaryHeaderColor
                         : null,
