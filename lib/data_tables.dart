@@ -24,8 +24,8 @@ class NativeDataTable extends StatelessWidget {
 //   }
 
   const NativeDataTable({
-    @required this.columns,
-    @required this.rows,
+    required this.columns,
+    required this.rows,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     this.header,
     this.onRowsPerPageChanged,
@@ -49,10 +49,10 @@ class NativeDataTable extends StatelessWidget {
   });
 
   NativeDataTable.builder({
-    @required this.columns,
+    required this.columns,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
-    @required int itemCount,
-    @required DataRowBuilder itemBuilder,
+    required int itemCount,
+    required DataRowBuilder itemBuilder,
     this.header,
     this.onRowsPerPageChanged,
     this.onSelectAll,
@@ -74,101 +74,78 @@ class NativeDataTable extends StatelessWidget {
     this.alwaysShowDataTable = false,
   }) : rows = _buildRows(itemCount, itemBuilder);
 
-  final int sortColumnIndex;
-
-  final bool sortAscending;
-
-  final ValueChanged<bool> onSelectAll;
-
-  final ValueChanged<int> onRowsPerPageChanged;
-
+  final int? sortColumnIndex;
+  final bool? sortAscending;
+  final ValueChanged<bool?>? onSelectAll;
+  final ValueChanged<int?>? onRowsPerPageChanged;
   final int rowsPerPage;
-
   final int firstRowIndex;
-
   /// Visible on Tablet/Desktop
-  final Widget header;
-
+  final Widget? header;
   final List<DataColumn> columns;
-
   final List<DataRow> rows;
-
-  final IndexedWidgetBuilder mobileItemBuilder;
-
+  final IndexedWidgetBuilder? mobileItemBuilder;
   final Size tabletBreakpoint;
-
-  final List<Widget> actions, selectedActions;
-
+  final List<Widget>? actions, selectedActions;
   final int mobileFetchNextRows;
-
-  final RefreshCallback onRefresh;
-
-  final VoidCallback handlePrevious, handleNext;
-
+  final RefreshCallback? onRefresh;
+  final VoidCallback? handlePrevious, handleNext;
   /// Set this to [true] for using this with a api
   final bool rowCountApproximate;
-
-  final Widget noItems;
-
-  final Widget mobileIsLoading;
-
-  final List<Widget> mobileSlivers;
-
+  final Widget? noItems;
+  final Widget? mobileIsLoading;
+  final List<Widget>? mobileSlivers;
   final bool alwaysShowDataTable;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (_, dimens) {
-        if (alwaysShowDataTable ||
-            (dimens.maxWidth >= tabletBreakpoint.width &&
-                dimens.maxHeight >= tabletBreakpoint.height)) {
-          return StatelessDataTable(
-            rows: rows,
-            firstRowIndex: firstRowIndex,
-            header: header ?? Container(),
-            handleNext: handleNext,
-            handlePrevious: handlePrevious,
-            rowsPerPage: rowsPerPage,
-            onRowsPerPageChanged: onRowsPerPageChanged,
-            sortColumnIndex: sortColumnIndex,
-            sortAscending: sortAscending,
-            onSelectAll: onSelectAll,
-            columns: columns,
-            shrinkWrap: false,
-            rowCountApproximate: rowCountApproximate,
-            actions: []
-              ..addAll(actions)
-              ..add(Container(
-                child: onRefresh == null
-                    ? null
-                    : IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: onRefresh,
-                      ),
-              )),
-            selectedActions: selectedActions,
-          );
-        }
+    if (alwaysShowDataTable ||
+        (MediaQuery.of(context).size.width >= tabletBreakpoint.width &&
+            MediaQuery.of(context).size.height >= tabletBreakpoint.height)) {
+      return StatelessDataTable(
+        rows: rows,
+        firstRowIndex: firstRowIndex,
+        header: header ?? Container(),
+        handleNext: handleNext,
+        handlePrevious: handlePrevious,
+        rowsPerPage: rowsPerPage,
+        onRowsPerPageChanged: onRowsPerPageChanged,
+        sortColumnIndex: sortColumnIndex,
+        sortAscending: sortAscending!,
+        onSelectAll: onSelectAll,
+        columns: columns,
+        shrinkWrap: false,
+        rowCountApproximate: rowCountApproximate,
+        actions: []
+          ..addAll(actions!)
+          ..add(Container(
+            child: onRefresh == null
+                ? null
+                : IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: onRefresh,
+                  ),
+          )),
+        selectedActions: selectedActions,
+      );
+    }
 
-        return PagedListView(
-          rows: rows,
-          slivers: mobileSlivers,
-          columns: columns,
-          loadNext: handleNext,
-          mobileItemBuilder: mobileItemBuilder,
-          actions: actions,
-          selectedActions: selectedActions,
-          onSelectAll: onSelectAll,
-          rowsPerPage: rowsPerPage,
-          sortAscending: sortAscending,
-          sortColumnIndex: sortColumnIndex,
-          onRefresh: onRefresh,
-          isRowCountApproximate: rowCountApproximate,
-          isLoading: mobileIsLoading,
-          noItems: noItems,
-        );
-      },
+    return PagedListView(
+      rows: rows,
+      slivers: mobileSlivers,
+      columns: columns,
+      loadNext: handleNext,
+      mobileItemBuilder: mobileItemBuilder,
+      actions: actions,
+      selectedActions: selectedActions,
+      onSelectAll: onSelectAll,
+      rowsPerPage: rowsPerPage,
+      sortAscending: sortAscending,
+      sortColumnIndex: sortColumnIndex,
+      onRefresh: onRefresh,
+      isRowCountApproximate: rowCountApproximate,
+      isLoading: mobileIsLoading,
+      noItems: noItems,
     );
   }
 
