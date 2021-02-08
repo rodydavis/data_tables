@@ -1,11 +1,6 @@
-## 1.0.3
+## 1.1.0-nullsafety
 
-* Adding support for web
-
-## 1.0.2
-
-* Bumping version
-* Updated Example
+* Updating to null safety
 
 ## 1.0.1 - 04.06.2019
 
