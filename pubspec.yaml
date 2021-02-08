@@ -1,6 +1,6 @@
 name: data_tables
 description: ListView on Mobile and Stateless Data Tables on Tablets and Desktops.
-version: 1.1.0-nullsafety
+version: 1.1.1-nullsafety
 author: Rody Davis <rody.davis.jr@gmail.com>
 homepage: https://github.com/rodydavis/plugins
 environment:

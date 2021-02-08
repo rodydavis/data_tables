@@ -1,3 +1,7 @@
+## 1.1.1-nullsafety
+
+* Updating to null safety
+
 ## 1.1.0-nullsafety
 
 * Updating to null safety
