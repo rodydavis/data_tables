@@ -11,7 +11,8 @@ class NativeDataTable extends StatelessWidget {
     required this.rows,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     this.header,
-    this.showCheckboxColumn = true,
+    this.showSelect = true,
+    this.showSort = true,
     this.onRowsPerPageChanged,
     this.onSelectAll,
     this.sortAscending,
@@ -40,7 +41,8 @@ class NativeDataTable extends StatelessWidget {
     DataCell Function(String key, dynamic value)? cellBuilder,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     this.header,
-    this.showCheckboxColumn = true,
+    this.showSelect = true,
+    this.showSort = true,
     this.onRowsPerPageChanged,
     this.onSelectAll,
     this.sortAscending,
@@ -84,7 +86,8 @@ class NativeDataTable extends StatelessWidget {
     this.onRowsPerPageChanged,
     this.onSelectAll,
     this.sortAscending,
-    this.showCheckboxColumn = true,
+    this.showSelect = true,
+    this.showSort = true,
     this.sortColumnIndex,
     this.mobileItemBuilder,
     this.tabletBreakpoint = _kTabletBreakpoint,
@@ -122,7 +125,7 @@ class NativeDataTable extends StatelessWidget {
 
   /// Set this to [true] for using this with a api
   final bool rowCountApproximate;
-  final bool showCheckboxColumn;
+  final bool showSelect, showSort;
   final Widget? noItems;
   final Widget? mobileIsLoading;
   final List<Widget>? mobileSlivers;
@@ -138,7 +141,7 @@ class NativeDataTable extends StatelessWidget {
         rows: rows,
         firstRowIndex: firstRowIndex,
         header: header,
-        showCheckboxColumn: showCheckboxColumn,
+        showCheckboxColumn: showSelect,
         handleNext: handleNext,
         handlePrevious: handlePrevious,
         rowsPerPage: rowsPerPage,
@@ -169,6 +172,8 @@ class NativeDataTable extends StatelessWidget {
       rows: rows,
       slivers: mobileSlivers,
       columns: columns,
+      showSelect: showSelect,
+      showSort: showSort,
       loadNext: handleNext,
       mobileItemBuilder: mobileItemBuilder,
       actions: actions,

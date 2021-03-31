@@ -1,3 +1,8 @@
+## 1.3.0
+
+* adding `showSelect'
+* adding `showSort'
+
 ## 1.2.0
 
 * Stable Version

@@ -45,7 +45,8 @@ class _JsonExampleState extends State<JsonExample> {
       body: _items == null || _items.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : NativeDataTable.fromJson(
-              showCheckboxColumn: false,
+              showSelect: false,
+              showSort: false,
               rowsPerPage: 40,
               items: _items,
             ),
