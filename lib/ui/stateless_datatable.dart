@@ -6,11 +6,12 @@ import 'package:flutter/widgets.dart';
 class StatelessDataTable extends StatelessWidget {
   StatelessDataTable({
     Key? key,
-    required this.header,
+    this.header,
     this.actions,
     required this.columns,
     required this.rows,
     this.sortColumnIndex,
+    this.showCheckboxColumn = true,
     this.sortAscending = true,
     this.onSelectAll,
     this.firstRowIndex = 0,
@@ -41,7 +42,8 @@ class StatelessDataTable extends StatelessWidget {
         super(key: key);
 
   final VoidCallback? handleNext, handlePrevious;
-  final Widget header;
+  final Widget? header;
+  final bool showCheckboxColumn;
   final List<Widget>? actions, selectedActions;
   final List<DataColumn> columns;
   final List<DataRow> rows;
@@ -117,11 +119,14 @@ class StatelessDataTable extends StatelessWidget {
         MaterialLocalizations.of(context);
 
     final List<Widget> headerWidgets = <Widget>[];
-    double startPadding = 24.0;
+    double startPadding = 24;
+
     if (_selectedRowCount == 0) {
-      headerWidgets.add(Expanded(child: header));
-      if (header is ButtonBar) {
-        startPadding = 12.0;
+      if (header != null) {
+        headerWidgets.add(Expanded(child: header!));
+        if (header is ButtonBar) {
+          startPadding = 12.0;
+        }
       }
     } else {
       headerWidgets.add(Expanded(
@@ -200,34 +205,35 @@ class StatelessDataTable extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Semantics(
-              container: true,
-              child: DefaultTextStyle(
-                style: _selectedRowCount > 0
-                    ? themeData.textTheme.subhead!
-                        .copyWith(color: themeData.accentColor)
-                    : themeData.textTheme.title!
-                        .copyWith(fontWeight: FontWeight.w400),
-                child: IconTheme.merge(
-                  data: const IconThemeData(opacity: 0.54),
-                  child: ButtonTheme(
-                    child: Ink(
-                      height: 64.0,
-                      color: _selectedRowCount > 0
-                          ? themeData.secondaryHeaderColor
-                          : null,
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: startPadding, end: 14.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: headerWidgets),
+            if (showCheckboxColumn)
+              Semantics(
+                container: true,
+                child: DefaultTextStyle(
+                  style: _selectedRowCount > 0
+                      ? themeData.textTheme.subhead!
+                          .copyWith(color: themeData.accentColor)
+                      : themeData.textTheme.title!
+                          .copyWith(fontWeight: FontWeight.w400),
+                  child: IconTheme.merge(
+                    data: const IconThemeData(opacity: 0.54),
+                    child: ButtonTheme(
+                      child: Ink(
+                        height: 64.0,
+                        color: _selectedRowCount > 0
+                            ? themeData.secondaryHeaderColor
+                            : null,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(
+                              start: startPadding, end: 14.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: headerWidgets),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               dragStartBehavior: dragStartBehavior,
@@ -235,6 +241,7 @@ class StatelessDataTable extends StatelessWidget {
                 builder: (BuildContext context) {
                   final rows = _getRows(firstRowIndex, rowsPerPage);
                   return DataTable(
+                    showCheckboxColumn: showCheckboxColumn,
                     key: _tableKey,
                     columns: columns,
                     sortColumnIndex: sortColumnIndex,
@@ -271,34 +278,35 @@ class StatelessDataTable extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Semantics(
-            container: true,
-            child: DefaultTextStyle(
-              style: _selectedRowCount > 0
-                  ? themeData.textTheme.subhead!
-                      .copyWith(color: themeData.accentColor)
-                  : themeData.textTheme.title!
-                      .copyWith(fontWeight: FontWeight.w400),
-              child: IconTheme.merge(
-                data: const IconThemeData(opacity: 0.54),
-                child: ButtonTheme(
-                  child: Ink(
-                    height: 64.0,
-                    color: _selectedRowCount > 0
-                        ? themeData.secondaryHeaderColor
-                        : null,
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.only(
-                          start: startPadding, end: 14.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: headerWidgets),
+          if (showCheckboxColumn)
+            Semantics(
+              container: true,
+              child: DefaultTextStyle(
+                style: _selectedRowCount > 0
+                    ? themeData.textTheme.subhead!
+                        .copyWith(color: themeData.accentColor)
+                    : themeData.textTheme.title!
+                        .copyWith(fontWeight: FontWeight.w400),
+                child: IconTheme.merge(
+                  data: const IconThemeData(opacity: 0.54),
+                  child: ButtonTheme(
+                    child: Ink(
+                      height: 64.0,
+                      color: _selectedRowCount > 0
+                          ? themeData.secondaryHeaderColor
+                          : null,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(
+                            start: startPadding, end: 14.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: headerWidgets),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
           Expanded(
               flex: 8,
               child: Scrollbar(

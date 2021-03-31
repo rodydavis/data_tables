@@ -3,37 +3,21 @@ import 'package:flutter/material.dart';
 import 'ui/mobile_paged_listview.dart';
 import 'ui/stateless_datatable.dart';
 
+const _kTabletBreakpoint = Size(480, 480);
+
 class NativeDataTable extends StatelessWidget {
-//   @override
-//   _DataTableDemoState createState() => _DataTableDemoState();
-// }
-
-// class _DataTableDemoState extends State<DataTableDemo> {
-//   int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
-//   int _sortColumnIndex;
-//   bool _sortAscending = true;
-//   final DessertDataSource _dessertsDataSource = DessertDataSource();
-
-//   void _sort<T>(
-//       Comparable<T> getField(Dessert d), int columnIndex, bool ascending) {
-//     _dessertsDataSource._sort<T>(getField, ascending);
-//     setState(() {
-//       _sortColumnIndex = columnIndex;
-//       _sortAscending = ascending;
-//     });
-//   }
-
   const NativeDataTable({
     required this.columns,
     required this.rows,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
     this.header,
+    this.showCheckboxColumn = true,
     this.onRowsPerPageChanged,
     this.onSelectAll,
     this.sortAscending,
     this.sortColumnIndex,
     this.mobileItemBuilder,
-    this.tabletBreakpoint = const Size(480.0, 480.0),
+    this.tabletBreakpoint = _kTabletBreakpoint,
     this.actions,
     this.firstRowIndex = 0,
     this.selectedActions,
@@ -48,6 +32,49 @@ class NativeDataTable extends StatelessWidget {
     this.alwaysShowDataTable = false,
   });
 
+  NativeDataTable.fromJson({
+    required List<Map<String, dynamic>> items,
+    List<String>? columnKeys,
+    DataColumn Function(String key)? columnBuilder,
+    DataRow Function(Map<String, dynamic> item)? rowBuilder,
+    DataCell Function(String key, dynamic value)? cellBuilder,
+    this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
+    this.header,
+    this.showCheckboxColumn = true,
+    this.onRowsPerPageChanged,
+    this.onSelectAll,
+    this.sortAscending,
+    this.sortColumnIndex,
+    this.mobileItemBuilder,
+    this.tabletBreakpoint = _kTabletBreakpoint,
+    this.actions,
+    this.firstRowIndex = 0,
+    this.selectedActions,
+    this.onRefresh,
+    this.mobileFetchNextRows = 100,
+    this.handlePrevious,
+    this.handleNext,
+    this.rowCountApproximate = false,
+    this.noItems,
+    this.mobileIsLoading,
+    this.mobileSlivers,
+    this.alwaysShowDataTable = false,
+  })  : assert(items.isNotEmpty || columnKeys != null),
+        columns = (columnKeys ?? items[0].keys.toList()).map((e) {
+          if (columnBuilder != null) return columnBuilder(e);
+          return DataColumn(label: Text(e));
+        }).toList(),
+        rows = items.isEmpty
+            ? []
+            : items.map((e) {
+                if (rowBuilder != null) return rowBuilder(e);
+                return DataRow(
+                    cells: e.entries.map((e) {
+                  if (cellBuilder != null) return cellBuilder(e.key, e.value);
+                  return DataCell(Text(e.value.toString()));
+                }).toList());
+              }).toList();
+
   NativeDataTable.builder({
     required this.columns,
     this.rowsPerPage = PaginatedDataTable.defaultRowsPerPage,
@@ -57,9 +84,10 @@ class NativeDataTable extends StatelessWidget {
     this.onRowsPerPageChanged,
     this.onSelectAll,
     this.sortAscending,
+    this.showCheckboxColumn = true,
     this.sortColumnIndex,
     this.mobileItemBuilder,
-    this.tabletBreakpoint = const Size(480.0, 480.0),
+    this.tabletBreakpoint = _kTabletBreakpoint,
     this.actions,
     this.selectedActions,
     this.firstRowIndex = 0,
@@ -80,6 +108,7 @@ class NativeDataTable extends StatelessWidget {
   final ValueChanged<int?>? onRowsPerPageChanged;
   final int rowsPerPage;
   final int firstRowIndex;
+
   /// Visible on Tablet/Desktop
   final Widget? header;
   final List<DataColumn> columns;
@@ -90,8 +119,10 @@ class NativeDataTable extends StatelessWidget {
   final int mobileFetchNextRows;
   final RefreshCallback? onRefresh;
   final VoidCallback? handlePrevious, handleNext;
+
   /// Set this to [true] for using this with a api
   final bool rowCountApproximate;
+  final bool showCheckboxColumn;
   final Widget? noItems;
   final Widget? mobileIsLoading;
   final List<Widget>? mobileSlivers;
@@ -99,33 +130,37 @@ class NativeDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (alwaysShowDataTable ||
-        (MediaQuery.of(context).size.width >= tabletBreakpoint.width &&
-            MediaQuery.of(context).size.height >= tabletBreakpoint.height)) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= tabletBreakpoint.width &&
+        size.height >= tabletBreakpoint.height;
+    if (alwaysShowDataTable || isTablet) {
       return StatelessDataTable(
         rows: rows,
         firstRowIndex: firstRowIndex,
-        header: header ?? Container(),
+        header: header,
+        showCheckboxColumn: showCheckboxColumn,
         handleNext: handleNext,
         handlePrevious: handlePrevious,
         rowsPerPage: rowsPerPage,
         onRowsPerPageChanged: onRowsPerPageChanged,
         sortColumnIndex: sortColumnIndex,
-        sortAscending: sortAscending!,
+        sortAscending: sortAscending ?? false,
         onSelectAll: onSelectAll,
         columns: columns,
+        // ignore: avoid_redundant_argument_values
         shrinkWrap: false,
         rowCountApproximate: rowCountApproximate,
-        actions: []
-          ..addAll(actions!)
-          ..add(Container(
+        actions: [
+          ...actions ?? [],
+          Container(
             child: onRefresh == null
                 ? null
                 : IconButton(
-                    icon: Icon(Icons.refresh),
+                    icon: const Icon(Icons.refresh),
                     onPressed: onRefresh,
                   ),
-          )),
+          ),
+        ],
         selectedActions: selectedActions,
       );
     }

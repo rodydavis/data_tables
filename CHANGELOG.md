@@ -1,3 +1,9 @@
+## 1.2.0
+
+* Stable Version
+* Added '.fromJson'
+* Updated Examples
+
 ## 1.1.1-nullsafety
 
 * Updating to null safety
