@@ -1,11 +1,21 @@
-## 1.0.3
+## 1.3.0
 
-* Adding support for web
+* adding `showSelect'
+* adding `showSort'
 
-## 1.0.2
+## 1.2.0
 
-* Bumping version
-* Updated Example
+* Stable Version
+* Added '.fromJson'
+* Updated Examples
+
+## 1.1.1-nullsafety
+
+* Updating to null safety
+
+## 1.1.0-nullsafety
+
+* Updating to null safety
 
 ## 1.0.1 - 04.06.2019
 
