@@ -99,10 +99,21 @@ class StatelessDataTable extends StatelessWidget {
           row ??= _getProgressIndicatorRowFor(index);
           haveProgressIndicator = true;
         }
+        row ??= _getBlankRowFor(index);
+        result.add(row);
       }
-      row ??= _getBlankRowFor(index);
-      result.add(row);
     }
+    //show no data
+    if(result.length<=0){
+      var cells= columns
+          .map<DataCell>((DataColumn column) => DataCell.empty)
+          .toList();
+      cells[cells.length~/2] = DataCell(Text('no data'));
+      result.add(DataRow.byIndex(
+          index: 0,
+          cells:cells));
+    }
+
     return result;
   }
 
