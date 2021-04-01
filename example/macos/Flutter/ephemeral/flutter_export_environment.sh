@@ -1,8 +1,15 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/usr/local/Caskroom/flutter/1.2.1/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/rodydavis/Developer/GitHub/packages/plugins/packages/data_tables/example"
+export "FLUTTER_APPLICATION_PATH=/Users/rodydavis/Developer/GitHub/plugins/packages/data_tables/example"
+export "COCOAPODS_PARALLEL_CODE_SIGN=true"
+export "FLUTTER_TARGET=/Users/rodydavis/Developer/GitHub/plugins/packages/data_tables/example/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "FLUTTER_FRAMEWORK_DIR=/usr/local/Caskroom/flutter/1.2.1/flutter/bin/cache/artifacts/engine/darwin-x64"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
+export "EXCLUDED_ARCHS=arm64"
+export "DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ=="
+export "DART_OBFUSCATION=false"
+export "TRACK_WIDGET_CREATION=true"
+export "TREE_SHAKE_ICONS=false"
+export "PACKAGE_CONFIG=/Users/rodydavis/Developer/GitHub/plugins/packages/data_tables/example/.dart_tool/package_config.json"
