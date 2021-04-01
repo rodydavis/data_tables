@@ -1,3 +1,8 @@
+## 1.3.1
+
+* support for no items
+* adding totalItems
+
 ## 1.3.0
 
 * adding `showSelect'

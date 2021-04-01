@@ -49,6 +49,7 @@ class NativeDataTable extends StatelessWidget {
     this.sortAscending,
     this.sortColumnIndex,
     this.mobileItemBuilder,
+    this.totalItems,
     this.tabletBreakpoint = _kTabletBreakpoint,
     this.actions,
     this.firstRowIndex = 0,
@@ -107,12 +108,11 @@ class NativeDataTable extends StatelessWidget {
     this.alwaysShowDataTable = false,
   }) : rows = _buildRows(itemCount, itemBuilder);
 
-
   final int? sortColumnIndex;
   final bool? sortAscending;
   final ValueChanged<bool?>? onSelectAll;
   final ValueChanged<int?>? onRowsPerPageChanged;
-  final int totalItems;
+  final int? totalItems;
   final int rowsPerPage;
   final int firstRowIndex;
 

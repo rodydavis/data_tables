@@ -50,7 +50,7 @@ class StatelessDataTable extends StatelessWidget {
   final List<DataRow> rows;
   final bool shrinkWrap;
   final int? sortColumnIndex;
-  final int totalItems;
+  final int? totalItems;
   final bool sortAscending;
   final ValueSetter<bool?>? onSelectAll;
   final ValueChanged<int?>? onPageChanged;
