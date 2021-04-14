@@ -104,8 +104,7 @@ class _NativePagedListViewState extends State<PagedListView> {
                               (context, index) {
                                 return ExpansionTile(
                                   leading: widget.showSelect
-                                      ? null
-                                      : Checkbox(
+                                      ? Checkbox(
                                           value: widget.rows[index].selected,
                                           onChanged: (bool? value) {
                                             setState(() {
@@ -113,7 +112,8 @@ class _NativePagedListViewState extends State<PagedListView> {
                                                   .onSelectChanged!(value);
                                             });
                                           },
-                                        ),
+                                        )
+                                      : null,
                                   title: widget.rows[index].cells.first.child,
                                   children: _buildMobileChildren(index),
                                 );
@@ -133,7 +133,6 @@ class _NativePagedListViewState extends State<PagedListView> {
                 top: cupertino.BorderSide(color: Colors.grey[200]!),
               )),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: rowsSelected ? selectedActions : actions,
               ),
@@ -146,7 +145,7 @@ class _NativePagedListViewState extends State<PagedListView> {
   List<Widget> get actions => [
         if (widget.showSelect)
           IconButton(
-            icon: Icon(Icons.select_all),
+            icon: const Icon(Icons.select_all),
             onPressed: () {
               setState(() {
                 widget.onSelectAll!(true);
@@ -156,11 +155,11 @@ class _NativePagedListViewState extends State<PagedListView> {
         if (widget.showSort)
           IconButton(
             tooltip: "Sort Items",
-            icon: Icon(Icons.sort_by_alpha),
+            icon: const Icon(Icons.sort_by_alpha),
             onPressed: () {
               if (_sortController != null) {
                 _sortController!.close();
-                print("Close...");
+                debugPrint("Close...");
                 return;
               }
 
@@ -242,7 +241,7 @@ class _NativePagedListViewState extends State<PagedListView> {
               });
 
               _sortController!.closed.whenComplete(() {
-                print("Done");
+                debugPrint("Done");
                 _sortController = null;
               });
             },
