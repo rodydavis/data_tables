@@ -153,7 +153,7 @@ class NativeDataTable extends StatelessWidget {
         onRowsPerPageChanged: onRowsPerPageChanged,
         sortColumnIndex: sortColumnIndex,
         sortAscending: sortAscending ?? false,
-        onSelectAll: onSelectAll,
+        onSelectAll: showSelect ? onSelectAll : null,
         columns: columns,
         // ignore: avoid_redundant_argument_values
         shrinkWrap: false,

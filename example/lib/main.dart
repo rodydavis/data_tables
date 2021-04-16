@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'examples/default.dart';
 import 'examples/json.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // theme: ThemeData.dark(),
-      home: JsonExample(),
+      home: DefaultExample(),
     );
   }
 }

@@ -69,7 +69,7 @@ class _DefaultExampleState extends State<DefaultExample> {
             _rowsOffset -= _rowsPerPage;
           });
         },
-        mobileSlivers: <Widget>[
+        mobileSlivers: const [
           SliverAppBar(title: Text('Mobile App Bar')),
         ],
         itemBuilder: (int index) {
@@ -85,18 +85,18 @@ class _DefaultExampleState extends State<DefaultExample> {
                 }
               },
               cells: <DataCell>[
-                DataCell(Text('${dessert.name}')),
+                DataCell(Text(dessert.name)),
                 DataCell(Text('${dessert.calories}')),
-                DataCell(Text('${dessert.fat.toStringAsFixed(1)}')),
+                DataCell(Text(dessert.fat.toStringAsFixed(1))),
                 DataCell(Text('${dessert.carbs}')),
-                DataCell(Text('${dessert.protein.toStringAsFixed(1)}')),
+                DataCell(Text(dessert.protein.toStringAsFixed(1))),
                 DataCell(Text('${dessert.sodium}')),
                 DataCell(Text('${dessert.calcium}%')),
                 DataCell(Text('${dessert.iron}%')),
                 DataCell(ButtonBar(
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
                         setState(() {
                           _items.remove(dessert);

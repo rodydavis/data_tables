@@ -36,8 +36,9 @@ class StatelessDataTable extends StatelessWidget {
             (sortColumnIndex >= 0 && sortColumnIndex < columns.length)),
         assert(rowsPerPage > 0),
         assert(() {
-          if (onRowsPerPageChanged != null)
+          if (onRowsPerPageChanged != null) {
             assert(availableRowsPerPage.contains(rowsPerPage));
+          }
           return true;
         }()),
         super(key: key);
@@ -106,14 +107,11 @@ class StatelessDataTable extends StatelessWidget {
       }
     }
     //show no data
-    if(result.length<=0){
-      var cells= columns
-          .map<DataCell>((DataColumn column) => DataCell.empty)
-          .toList();
-      cells[cells.length~/2] = DataCell(Text('no data'));
-      result.add(DataRow.byIndex(
-          index: 0,
-          cells:cells));
+    if (result.isEmpty) {
+      var cells =
+          columns.map<DataCell>((DataColumn column) => DataCell.empty).toList();
+      cells[cells.length ~/ 2] = const DataCell(Text('no data'));
+      result.add(DataRow.byIndex(index: 0, cells: cells));
     }
 
     return result;
@@ -166,16 +164,15 @@ class StatelessDataTable extends StatelessWidget {
     final List<Widget> footerWidgets = <Widget>[];
     if (onRowsPerPageChanged != null) {
       final List<Widget> _footerChildren = availableRowsPerPage
-          .where(((int value) => value <= rows.length || value == rowsPerPage)
-              as bool Function(int))
+          .where((int value) => value <= rows.length || value == rowsPerPage)
           .map<DropdownMenuItem<int>>((int value) {
         return DropdownMenuItem<int>(value: value, child: Text('$value'));
       }).toList();
       footerWidgets.addAll(<Widget>[
-        Container(width: 14.0),
+        Container(width: 14),
         Text(localizations.rowsPerPageTitle),
         ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 64.0),
+          constraints: const BoxConstraints(minWidth: 64),
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
             child: DropdownButtonHideUnderline(
@@ -184,7 +181,6 @@ class StatelessDataTable extends StatelessWidget {
                 value: rowsPerPage,
                 onChanged: onRowsPerPageChanged,
                 style: footerTextStyle,
-                iconSize: 24.0,
               ),
             ),
           ),
@@ -192,25 +188,28 @@ class StatelessDataTable extends StatelessWidget {
       ]);
     }
     footerWidgets.addAll(<Widget>[
-      Container(width: 32.0),
-      Text(localizations.pageRowsInfoTitle(firstRowIndex + 1,
-          firstRowIndex + rowsPerPage, totalItems??rows.length, rowCountApproximate)),
-      Container(width: 32.0),
+      Container(width: 32),
+      Text(localizations.pageRowsInfoTitle(
+          firstRowIndex + 1,
+          firstRowIndex + rowsPerPage,
+          totalItems ?? rows.length,
+          rowCountApproximate)),
+      Container(width: 32),
       IconButton(
           icon: const Icon(Icons.chevron_left),
           padding: EdgeInsets.zero,
           tooltip: localizations.previousPageTooltip,
           onPressed: firstRowIndex <= 0 ? null : handlePrevious),
-      Container(width: 24.0),
+      Container(width: 24),
       IconButton(
           icon: const Icon(Icons.chevron_right),
           padding: EdgeInsets.zero,
           tooltip: localizations.nextPageTooltip,
           onPressed: (!rowCountApproximate &&
-                  (firstRowIndex + rowsPerPage >= (totalItems??rows.length)))
+                  (firstRowIndex + rowsPerPage >= (totalItems ?? rows.length)))
               ? null
               : handleNext),
-      Container(width: 14.0),
+      Container(width: 14),
     ]);
 
     if (shrinkWrap) {
@@ -231,13 +230,13 @@ class StatelessDataTable extends StatelessWidget {
                     data: const IconThemeData(opacity: 0.54),
                     child: ButtonTheme(
                       child: Ink(
-                        height: 64.0,
+                        height: 64,
                         color: _selectedRowCount > 0
                             ? themeData.secondaryHeaderColor
                             : null,
                         child: Padding(
                           padding: EdgeInsetsDirectional.only(
-                              start: startPadding, end: 14.0),
+                              start: startPadding, end: 14),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: headerWidgets),
@@ -270,7 +269,7 @@ class StatelessDataTable extends StatelessWidget {
               child: IconTheme.merge(
                 data: const IconThemeData(opacity: 0.54),
                 child: Container(
-                  height: 56.0,
+                  height: 56,
                   child: SingleChildScrollView(
                     dragStartBehavior: dragStartBehavior,
                     scrollDirection: Axis.horizontal,
@@ -304,13 +303,13 @@ class StatelessDataTable extends StatelessWidget {
                   data: const IconThemeData(opacity: 0.54),
                   child: ButtonTheme(
                     child: Ink(
-                      height: 64.0,
+                      height: 64,
                       color: _selectedRowCount > 0
                           ? themeData.secondaryHeaderColor
                           : null,
                       child: Padding(
                         padding: EdgeInsetsDirectional.only(
-                            start: startPadding, end: 14.0),
+                            start: startPadding, end: 14),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: headerWidgets),
@@ -342,8 +341,8 @@ class StatelessDataTable extends StatelessWidget {
             style: footerTextStyle!,
             child: IconTheme.merge(
               data: const IconThemeData(opacity: 0.54),
-              child: Container(
-                height: 56.0,
+              child: SizedBox(
+                height: 56,
                 child: SingleChildScrollView(
                   dragStartBehavior: dragStartBehavior,
                   scrollDirection: Axis.horizontal,
