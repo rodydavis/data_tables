@@ -10,11 +10,7 @@ class JsonExample extends StatefulWidget {
 }
 
 class _JsonExampleState extends State<JsonExample> {
-  int _rowsPerPage = 100;
-  int _sortColumnIndex;
-  bool _sortAscending = true;
   List<Map<String, dynamic>> _items = [];
-  int _rowsOffset = 0;
 
   @override
   void initState() {

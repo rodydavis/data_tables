@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'examples/default.dart';
-import 'examples/json.dart';
 
 void main() => runApp(MyApp());
 
