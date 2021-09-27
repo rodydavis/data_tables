@@ -17,7 +17,7 @@ Date:27/sep/22021 Plugin not updated so you can add dependency like this if you 
 ```dart 
   data_tables:
     git:
-      url: git:github.com/dwpsoft/data_tables.git
+      url: https://github.com/dwpsoft/data_tables.git
 ```
 ## Getting Started
 
