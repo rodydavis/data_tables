@@ -12,7 +12,13 @@
 - From Json
 
 Online Demo: https://rodydavis.github.io/data_tables/
-
+### Usage
+Date:27/sep/22021 Plugin not updated so you can add dependency like this if you have any error in version 2.5.0
+```dart 
+  data_tables:
+    git:
+      url: https://github.com/dwpsoft/data_tables.git
+```
 ## Getting Started
 
 - You can optionally build the listview for mobile with a builder, by default it creates a ExpansionTile with the remaining columns as children
