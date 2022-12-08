@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -286,11 +288,11 @@ class StatelessDataTable extends StatelessWidget {
             ),
           Expanded(
               flex: 8,
-              child: Scrollbar(
-                  child: ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  SingleChildScrollView(
+              child: ScrollConfiguration(
+                behavior: CustomScrollBehavior(),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                         key: _tableKey,
@@ -300,8 +302,9 @@ class StatelessDataTable extends StatelessWidget {
                         onSelectAll: onSelectAll,
                         rows: _getRows(firstRowIndex, rowsPerPage)),
                   ),
-                ],
-              ))),
+                ),
+              ),
+          ),
           DefaultTextStyle(
             style: footerTextStyle!,
             child: IconTheme.merge(
@@ -323,4 +326,12 @@ class StatelessDataTable extends StatelessWidget {
       ),
     );
   }
+}
+
+class CustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
