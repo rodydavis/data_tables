@@ -149,7 +149,7 @@ class StatelessDataTable extends StatelessWidget {
       }).toList());
     }
 
-    final TextStyle? footerTextStyle = themeData.textTheme.caption;
+    final TextStyle? footerTextStyle = themeData.textTheme.bodySmall;
     final List<Widget> footerWidgets = <Widget>[];
     if (onRowsPerPageChanged != null) {
       final List<Widget> _footerChildren =
@@ -203,8 +203,8 @@ class StatelessDataTable extends StatelessWidget {
                 container: true,
                 child: DefaultTextStyle(
                   style: _selectedRowCount > 0
-                      ? themeData.textTheme.subtitle1!.copyWith(color: themeData.colorScheme.secondary)
-                      : themeData.textTheme.headline6!.copyWith(fontWeight: FontWeight.w400),
+                      ? themeData.textTheme.titleMedium!.copyWith(color: themeData.colorScheme.secondary)
+                      : themeData.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w400),
                   child: IconTheme.merge(
                     data: const IconThemeData(opacity: 0.54),
                     child: ButtonTheme(
@@ -269,8 +269,8 @@ class StatelessDataTable extends StatelessWidget {
               container: true,
               child: DefaultTextStyle(
                 style: _selectedRowCount > 0
-                    ? themeData.textTheme.subtitle1!.copyWith(color: themeData.colorScheme.secondary)
-                    : themeData.textTheme.headline6!.copyWith(fontWeight: FontWeight.w400),
+                    ? themeData.textTheme.titleMedium!.copyWith(color: themeData.colorScheme.secondary)
+                    : themeData.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w400),
                 child: IconTheme.merge(
                   data: const IconThemeData(opacity: 0.54),
                   child: ButtonTheme(
